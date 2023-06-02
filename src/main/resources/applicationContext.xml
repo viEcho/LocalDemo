@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="iocBeanLifeService" class="com.local.test.beanLife.BeanServiceTest" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="name" value="coolsummermoon"></property>
+        <property name="sex" value="man"></property>
+    </bean>
+
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+    <bean class="com.local.test.beanLife.CustomerBeanPostProcessor"/>
+</beans>
