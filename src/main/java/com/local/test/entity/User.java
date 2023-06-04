@@ -59,11 +59,11 @@ public class User {
 
 
     /**
-     *getAllList
-     *@param: address
-     *@param: phone
-     *@param: name
-     *@return: java.util.List<java.lang.String>
+     * 
+     * @param address
+     * @param phone
+     * @param name
+     * @return
      */
     protected List<String> getAllList(String address,String phone,String name) {
         return Arrays.asList(address,phone,name);

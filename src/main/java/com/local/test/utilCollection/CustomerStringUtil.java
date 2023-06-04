@@ -30,13 +30,14 @@ public class CustomerStringUtil {
             int spaceTab = getFirstSpaceLength(firstSubstr, strStart);
             return content.indexOf(substring) - spaceTab;
         } else {
-            if(Objects.equals(preFiledName,"sex;")){
-                System.out.println(preFiledName);
-            }
             String substring = content.substring(content.indexOf(preFiledName), content.indexOf(strEnd) + strEnd.length());
             if(substring.contains("{") && substring.indexOf("}") < substring.indexOf(strEnd)){
                 int index = content.indexOf(preFiledName) + substring.indexOf("}");
-                substring = content.substring(index);
+                substring = content.substring(index,content.indexOf(strEnd) + strEnd.length());
+                substring = substring.substring(substring.lastIndexOf("}"));
+            }
+            if(substring.contains("/**")){
+                return -1;
             }
             int spaceTab = getFirstSpaceLength(substring, strStart);
             String curFieldSubstring = substring.substring(substring.indexOf(strStart), substring.indexOf(strEnd) + strEnd.length());
