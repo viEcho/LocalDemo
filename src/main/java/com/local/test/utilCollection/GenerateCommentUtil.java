@@ -8,10 +8,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @description: 扫包生成注释的工具类
@@ -30,6 +28,8 @@ public class GenerateCommentUtil {
     private final static String FIELD_COMMENT = "\n   /**\n" +
                                                    "    *%s\n" +
                                                    "    */";
+    private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
     private final static List<String> GET_SET_METHODS;
     static {
         GET_SET_METHODS = new ArrayList<>();
@@ -69,15 +69,53 @@ public class GenerateCommentUtil {
         String packageClassName = file.getAbsolutePath().substring(file.getAbsolutePath().indexOf("java") + 5,
                 file.getAbsolutePath().indexOf(".")).replace("/", ".");
         String className = packageClassName.substring(packageClassName.lastIndexOf(".")+1);
+        String classComment = String.format(CLASS_COMMENT, className, "Echo", sdf.format(new Date()));
         Class<?> aClass = Class.forName(packageClassName);
         String content = FileUtils.readFileToString(file, "utf-8");
-        String classCommentStr = generateClassComment(content,className);
+        List<String> strings = FileUtils.readLines(file, "utf-8");
+        Field[] declaredFields = aClass.getDeclaredFields();
+        Method[] declaredMethods = aClass.getDeclaredMethods();
+        // 保存唯一key 及对应需要添加注释的下标
+        Map<String,Integer> linkedHashMap = new LinkedHashMap<>();
+        Constructor<?>[] declaredConstructors = aClass.getDeclaredConstructors();
+        List<String> constructorList = new ArrayList<>();
+        for (Constructor<?> declaredConstructor : declaredConstructors) {
+            String accessType = filedAccessType(declaredConstructor.getModifiers());
+            constructorList.add(accessType+" "+className);
+        }
+
+        if(null != declaredConstructors && declaredConstructors.length != 0){
+            constructorList = Arrays.stream(declaredConstructors).map(m -> m.getName()).collect(Collectors.toList());
+        }
+        String beforeClassStr = content.substring(0, content.indexOf("class " + className));
+        boolean containClassComment = beforeClassStr.contains("/**");
+        boolean containClassAnnotation = beforeClassStr.contains("@");
+        Integer classCommentIndex = null;
+
+        StringBuilder contentSb = new StringBuilder();
+        for (int row = 0;row < strings.size();row++ ) {
+            String rowStr = strings.get(row);
+            // 找到依赖包结束的位置
+            if(rowStr.contains("class") && rowStr.contains(className) && rowStr.contains("{")){
+                if(containClassComment) {
+                    continue;
+                }
+                //如果包含类注解
+                if(containClassAnnotation){
+                    classCommentIndex = content.indexOf("@")-1;
+                }else{
+                    classCommentIndex = content.indexOf(rowStr);
+                }
+                linkedHashMap.put(rowStr,classCommentIndex);
+            }
+        }
+        /*String classCommentStr = generateClassComment(content,className);
         String filedCommentStr = generateFiledComment(aClass, classCommentStr);
-        String methodCommentStr = generateMethodComment(aClass, filedCommentStr);
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        String methodCommentStr = generateMethodComment(aClass, filedCommentStr);*/
+        /*FileWriter fw = new FileWriter(file.getAbsoluteFile());
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(methodCommentStr);
-        bw.close();
+        bw.close();*/
     }
 
     private static String generateMethodComment(Class<?> aClass, String fileContent){

@@ -1,9 +1,8 @@
 package com.local.test.utilCollection;
 
-import java.util.Objects;
 
 /**
- * @description: TODO
+ * @description: 自定义字符串工具类
  * @author: echo
  * @date: 2023/6/2
  */
