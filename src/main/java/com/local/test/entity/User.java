@@ -1,10 +1,8 @@
 package com.local.test.entity;
 
 import lombok.Data;
-
 import java.util.Arrays;
 import java.util.List;
-
 
 /**
 *User
@@ -59,7 +57,7 @@ public class User {
 
 
     /**
-     * 
+     *
      * @param address
      * @param phone
      * @param name
