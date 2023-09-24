@@ -1,9 +1,7 @@
 package com.local.test.utilCollection;
 
-import lombok.Builder;
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,7 +9,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @description: 根据io 流读取java 文件添加注释
