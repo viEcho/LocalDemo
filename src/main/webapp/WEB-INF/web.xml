@@ -1,0 +1,23 @@
+<!--配置前端控制器，对浏览器发送的请求进行统一的管理-->
+<servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--配置SpringMVC的配置文件和位置-->
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:springmvc-config.xml</param-value>
+    </init-param>
+    <!--表示在服务启动时就立即加载Servlet（原本Servlet的初始化在第一次访问之后才会加载完成初始化）
+    浏览器发送的请求必须交给前端控制器，而前端控制器是一个Servlet，Servlet只有第一次访问时才会初始化，
+    我们设置为服务启动时就加载，可以实现对第一次访问也可以进行处理-->
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>SpringMVC</servlet-name>
+<!--
+设置springMVC的核心控制器所能处理的请求的请求路径
+/所匹配的请求可以是/login或.html或.js或.css方式的请求路径，但是/不能匹配.jsp请求路径的请求
+/*可以表示可以匹配所有的请求，可以设置过滤器为/*实现对所有请求的过滤
+-->
+<url-pattern>/</url-pattern>
+</servlet-mapping>
