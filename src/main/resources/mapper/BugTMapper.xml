@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.local.demo.mapper.BugTMapper">
+  <resultMap id="BaseResultMap" type="com.local.demo.entity.BugT">
+    <id column="bug_id" jdbcType="BIGINT" property="bugId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="bug_time" jdbcType="INTEGER" property="bugTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    bug_id, user_name, bug_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bug_t
+    where bug_id = #{bugId,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.local.demo.entity.BugT">
+    insert into bug_t (bug_id, user_name, bug_time
+      )
+    values (#{bugId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{bugTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.local.demo.entity.BugT">
+    update bug_t
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="bugTime != null">
+        bug_time = #{bugTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bug_id = #{bugId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.local.demo.entity.BugT">
+    update bug_t
+    set user_name = #{userName,jdbcType=VARCHAR},
+      bug_time = #{bugTime,jdbcType=INTEGER}
+    where bug_id = #{bugId,jdbcType=BIGINT}
+  </update>
+</mapper>
