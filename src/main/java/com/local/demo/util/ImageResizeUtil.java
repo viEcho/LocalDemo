@@ -22,7 +22,7 @@ public class ImageResizeUtil {
      * @throws IOException IOException
      */
     public static void main(String[] args) throws IOException {
-        String originalPath = "/Users/echo/Desktop/sjms.png";
+        String originalPath = "/Users/echo/Desktop/mybaits-nixiang.png";
         int targetWidth = 960;
         int targetHeight = 266;
         // 30*1024字节 表示调整到30K
