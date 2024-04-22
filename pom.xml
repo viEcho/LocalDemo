@@ -134,5 +134,11 @@
             <artifactId>mybatis-generator-core</artifactId>
             <version>1.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>5.7.16</version>
+        </dependency>
     </dependencies>
 </project>
