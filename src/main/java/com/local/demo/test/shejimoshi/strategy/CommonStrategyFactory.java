@@ -24,7 +24,7 @@ public class CommonStrategyFactory {
     /**
      * 策略
      */
-    private static final TwoLevelConcurrentHashMap<Class<? extends BaseCommonStrategy<?,?,?>>, Object,BaseCommonStrategy<?,?,?>> STRATEGY = new TwoLevelConcurrentHashMap<>();
+    private static final TwoLevelConcurrentHashMap<Class<? extends BaseCommonStrategy<?, ?, ?>>, Object, BaseCommonStrategy<?, ?, ?>> STRATEGY = new TwoLevelConcurrentHashMap<>();
 
 
     /**
@@ -33,16 +33,16 @@ public class CommonStrategyFactory {
      * @param routes 路线
      */
     @Autowired
-    private void buildStrategyFactory(List<BaseCommonStrategy<?,?,?>> routes){
+    private void buildStrategyFactory(List<BaseCommonStrategy<?, ?, ?>> routes) {
         log.info("构建通用策略start:{}", routes.size());
-        routes.forEach(strategy->{
+        routes.forEach(strategy -> {
             Class<? extends BaseCommonStrategy> aClass = strategy.getClass();
             StrategyType annotation = AnnotationUtils.findAnnotation(aClass, StrategyType.class);
-            if(null==annotation){
+            if (null == annotation) {
                 log.error("构建策略路由失败，找不到对应的annotation.clazz:{}", aClass);
                 throw new GlobalException(ResponseCodeEnum.ANNOTATION_CAN_NOT_FIND);
             }
-            STRATEGY.put(annotation.value(),strategy.routeKey(),strategy);
+            STRATEGY.put(annotation.value(), strategy.routeKey(), strategy);
         });
     }
 
@@ -55,17 +55,17 @@ public class CommonStrategyFactory {
      * @param parameters 参数
      * @return {@link R}
      */
-    public <P,K,R,S extends BaseCommonStrategy<P,K,R>> R handle(Class<? extends BaseCommonStrategy<P,K,R>> aClass,K routeKey,P parameters){
+    public <P, K, R, S extends BaseCommonStrategy<P, K, R>> R handle(Class<? extends BaseCommonStrategy<P, K, R>> aClass, K routeKey, P parameters) {
         String simpleName = aClass.getSimpleName();
-        try{
+        try {
             BaseCommonStrategy<P, K, R> strategy = (BaseCommonStrategy<P, K, R>) STRATEGY.get(aClass, routeKey);
-            if(null == strategy){
+            if (null == strategy) {
                 log.error("未找到对应的处理策略，routeKey:{},parameters:{}", routeKey, JSON.toJSON(parameters));
-                throw new GlobalException(ResponseCodeEnum.STARTEGY_CAN_NOT_FIND,simpleName+"未找到对应的处理策略");
+                throw new GlobalException(ResponseCodeEnum.STRATEGY_CAN_NOT_FIND, simpleName + "未找到对应的处理策略");
             }
             return strategy.handle(parameters);
-        }catch (Exception e){
-            log.error("strategy handle occurs error:"+e);
+        } catch (Exception e) {
+            log.error("strategy handle occurs error:" + e);
             throw new GlobalException(e.getMessage());
         }
     }
@@ -80,7 +80,7 @@ public class CommonStrategyFactory {
         /**
          * 层级map
          */
-        private ConcurrentHashMap<K, ConcurrentHashMap<R, P>>  levelMap;
+        private ConcurrentHashMap<K, ConcurrentHashMap<R, P>> levelMap;
 
         /**
          * 两级map
@@ -96,16 +96,16 @@ public class CommonStrategyFactory {
          * @param r r
          * @param p p
          */
-        public void put(K k,R r,P p){
-            if(levelMap.containsKey(k)){
+        public void put(K k, R r, P p) {
+            if (levelMap.containsKey(k)) {
                 ConcurrentHashMap<R, P> rpConcurrentHashMap = levelMap.get(k);
-                rpConcurrentHashMap.put(r,p);
+                rpConcurrentHashMap.put(r, p);
                 levelMap.put(k, rpConcurrentHashMap);
                 return;
             }
             ConcurrentHashMap<R, P> hashMap = new ConcurrentHashMap<>();
-            hashMap.put(r,p);
-            levelMap.put(k,hashMap);
+            hashMap.put(r, p);
+            levelMap.put(k, hashMap);
         }
 
         /**

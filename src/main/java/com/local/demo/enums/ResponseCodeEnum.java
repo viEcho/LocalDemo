@@ -16,7 +16,7 @@ public enum ResponseCodeEnum {
     UNKNOWN_REASON(false, 1001, "Unknown error"),
     BAD_SQL_GRAMMAR(false, 1002, "Sql syntax error"),
     ANNOTATION_CAN_NOT_FIND(false,1003,"Can not find the annotation"),
-    STARTEGY_CAN_NOT_FIND(false,1004,"Can not find the handle strategy");
+    STRATEGY_CAN_NOT_FIND(false,1004,"Can not find the handle strategy");
 
     // 是否响应成功
     private final Boolean success;
