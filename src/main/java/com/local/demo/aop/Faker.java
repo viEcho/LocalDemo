@@ -1,7 +1,6 @@
 package com.local.demo.aop;
 
 import com.local.demo.enums.FakerTypeEnum;
-
 import java.lang.annotation.*;
 
 @Target(ElementType.FIELD)

@@ -40,7 +40,7 @@ public class GenerateCommentUtil {
 
 
     public static void main(String[] args) throws Exception {
-        String path = "/Users/echo/Documents/sCloud/LocalDemo/src/main/java/com/local/test/entity";
+        String path = "/Users/echo/Documents/sCloud/LocalDemo/src/main/java/com/local/com.local.demo.test.test/entity";
         scanDictionary(path);
     }
 

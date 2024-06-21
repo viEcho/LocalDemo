@@ -1,11 +1,10 @@
-import org.mybatis.generator.api.ShellRunner;
+package com.local.demo.test;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class test {
+public class GitConfigTest {
 
     public static String getGitRemoteUrl() {
         try {

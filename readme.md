@@ -6,15 +6,16 @@
 
 | 包名              |     说明      |
 |:----------------|:-----------:| 
-| test.beanlife   | 演示bean的生命周期 |
-| test.calculate  |   算法刷题相关    |
-| test.filehandle |    文件操作     |
-| test.shejimoshi | 设计模式:单例，策略  |
+| com.local.demo.test.test.beanlife   | 演示bean的生命周期 |
+| com.local.demo.test.test.calculate  |   算法刷题相关    |
+| com.local.demo.test.test.filehandle |    文件操作     |
+| com.local.demo.test.test.shejimoshi | 设计模式:单例，策略  |
 
 ### 更新记录
 - 23.12.9 重新调整代码结构，连接数据库；主要是将代码按包做了拆分
 - 24.1.16 新增策略注解，全局异常捕获，响应封装；新增github仓库，将代码同步推送至github及gitee
 - 24.1.15 新增mvcFlowTestController测试mvc流程
+- 24.6月 新增python造数脚本生成工具类，及验证mysql join和left join对应索引优化的差异
 
 
 

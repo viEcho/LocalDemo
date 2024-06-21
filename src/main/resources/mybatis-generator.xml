@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-    <context id="MySqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context targetRuntime="MyBatis3" defaultModelType="flat" id="generate_base_code">
         <plugin type="com.local.demo.util.MybatisGeneratorPlugin">
         </plugin>
 
@@ -45,13 +45,21 @@
         </javaClientGenerator>
 
         <!-- 用于自动生成代码的数据库表；生成哪些表-->
-        <table tableName="bug_t"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
-        </table>
+<!--        <table tableName="mother_t"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="child_t"-->
+<!--               enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false"-->
+<!--               selectByExampleQueryId="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
     </context>
 </generatorConfiguration>

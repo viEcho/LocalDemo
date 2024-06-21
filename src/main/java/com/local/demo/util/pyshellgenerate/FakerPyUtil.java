@@ -2,7 +2,6 @@ package com.local.demo.util.pyshellgenerate;
 
 import cn.hutool.core.util.StrUtil;
 import com.local.demo.aop.Faker;
-import com.local.demo.entity.User;
 import com.local.demo.entity.UserInfo;
 import com.local.demo.enums.FakerTypeEnum;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,7 @@ public class FakerPyUtil {
 
     public static void main(String[] args) {
         // py地址
-        String baseFilePath = "/Users/echo/PycharmProjects/pythonProject/";
+        String baseFilePath = "/Users/echo/PycharmProjects/pythonProject/mockSqlPy/";
         List<Class<?>> classes = Arrays.asList(UserInfo.class);
         generatePyAccordEntity(classes, true, 10, baseFilePath);
     }
