@@ -1,4 +1,4 @@
-package com.local.demo.util.commentgenerate;
+package com.local.demo.util.commentGenerate;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.core.DefaultParameterNameDiscoverer;

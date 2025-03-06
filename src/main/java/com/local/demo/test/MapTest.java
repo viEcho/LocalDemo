@@ -13,9 +13,11 @@ public class MapTest {
     public static void main(String[] args) {
         HashMap hashMap = new HashMap<>();
         hashMap.put("aaaa","sss");
-        hashMap.put(null,"sssss");
+//        hashMap.put(null,"sssss");
         hashMap.put("ssss",null);
-        //hashMap.put(null,null);
+        hashMap.put(null,null);
+
+        System.out.println(hashMap.get(null));
         // hashMap key和value 都可以为null
         // 继承AbstractMap
 

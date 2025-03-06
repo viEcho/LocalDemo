@@ -1,4 +1,4 @@
-package com.local.demo.util.commentgenerate;
+package com.local.demo.util.commentGenerate;
 
 import lombok.Data;
 import org.apache.commons.io.FileUtils;

@@ -11,6 +11,7 @@ spring:
     password: 123456
     # 注意8.0以上需要时区的配置
     url: jdbc:mysql://localhost:3306/local_demo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    #url: jdbc:mysql://localhost:3306/nfturo?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     type: com.alibaba.druid.pool.DruidDataSource
